@@ -8,6 +8,7 @@ For more information, see the [Homepage](naive-lang.github.io).
 
 ## Language Features
 
+- [ ] Array
 - [ ] Module
 - [ ] Concurrency (coroutines? traditional threads?)
 - [ ] Reflection
@@ -15,6 +16,8 @@ For more information, see the [Homepage](naive-lang.github.io).
 
 ## Standard Libraries
 
+- [ ] String Manipulation
+- [ ] Collections
 - [ ] Interop with C
 
 ## Tooling
