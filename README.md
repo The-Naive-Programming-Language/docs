@@ -8,6 +8,8 @@ For more information, see the [Homepage](naive-lang.github.io).
 
 ## Language Features
 
+- [ ] Array
+- [ ] Hash
 - [ ] Module
 - [ ] Concurrency (coroutines? traditional threads?)
 - [ ] Reflection
@@ -15,9 +17,10 @@ For more information, see the [Homepage](naive-lang.github.io).
 
 ## Standard Libraries
 
-- [ ] Interop with C
 - [ ] String operations
+- [ ] Collections
 - [ ] JSON
+- [ ] Interop with C
 
 ## Tooling
 
@@ -25,4 +28,3 @@ For more information, see the [Homepage](naive-lang.github.io).
 - [ ] Benchmarking
 - [ ] Static checker
 - [ ] Code Formatter
-
