@@ -16,6 +16,8 @@ For more information, see the [Homepage](naive-lang.github.io).
 ## Standard Libraries
 
 - [ ] Interop with C
+- [ ] String operations
+- [ ] JSON
 
 ## Tooling
 
