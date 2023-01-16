@@ -8,6 +8,7 @@ prog : stmt* EOF ;
 stmt : ';'
      | decl_stmt
      | assign_stmt
+     | block
      | expr_stmt
      | 'print' '(' STRING ( ',' expr )* ')' ';'
      | COMMENT ;
@@ -16,6 +17,8 @@ decl_stmt : 'let' IDENT ( '=' init )? ';' ;
 init      : expr ;
 
 assign_stmt : IDENT '=' expr ';' ;
+
+block : '{' stmt* '}' ;
 
 expr_stmt  : expr ';' ;
 expr       : logical ;
