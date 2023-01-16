@@ -6,28 +6,28 @@ grammar naive;
 prog : stmt* EOF ;
 
 stmt : ';'
+     | decl_stmt
+     | assign_stmt
      | expr_stmt
-     | 'print' '(' STRING ( ',' expr )* ')' ';' ;
+     | 'print' '(' STRING ( ',' expr )* ')' ';'
+     | COMMENT ;
 
-expr_stmt : expr ';' ;
-expr      : arith_expr
-          | bool_expr
-          | STRING
-          | CHAR ;
+decl_stmt : 'let' IDENT ( '=' init )? ';' ;
+init      : expr ;
 
-arith_expr : term ;
-term       : factor ( ('+'|'-') factor )* ;
-factor     : arith_atom ( ('*'|'/'|'%') arith_atom )* ;
-arith_atom : INT | FLOAT | '(' arith_expr ')' ;
+assign_stmt : IDENT '=' expr ';' ;
 
-bool_expr  : or_clause ;
+expr_stmt  : expr ';' ;
+expr       : logical ;
+logical    : or_clause ;
 or_clause  : and_clause ( 'or' and_clause )* ;
-and_clause : not_clause ( 'and' not_clause )* ;
-not_clause : 'not' not_clause
-           | bool_atom ;
-bool_atom  : TRUE
-           | FALSE
-           | '(' bool_expr ')' ;
+and_clause : relational ( 'and' relational )* ;
+relational : term ( ('=='|'/='|'<'|'>'|'<='|'>=') term )* ;
+term       : factor ( ('+'|'-') factor )* ;
+factor     : unary ( ('*'|'/'|'%') unary )* ;
+unary      : ('not'|'-') unary
+           | primary ;
+primary    : INT | FLOAT | TRUE | FALSE | CHAR | STRING | IDENT | '(' expr ')' ;
 
 //
 // Tokens
@@ -48,5 +48,9 @@ NOT   : 'not' ;
 
 CHAR   : '\'' . '\'' ;
 STRING : '"' .*? '"' ;
+
+IDENT : [A-Za-z_][0-9A-Za-z_]* ;
+
+COMMENT : '#' .*? ('\n'|EOF) ;
 
 WHITESPACE : [ \t\r\n]+ -> skip;
