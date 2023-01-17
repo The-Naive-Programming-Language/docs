@@ -9,6 +9,8 @@ stmt : ';'
      | decl_stmt
      | assign_stmt
      | block
+     | if_else
+     | while_loop
      | expr_stmt
      | 'print' '(' STRING ( ',' expr )* ')' ';'
      | COMMENT ;
@@ -19,6 +21,10 @@ init      : expr ;
 assign_stmt : IDENT '=' expr ';' ;
 
 block : '{' stmt* '}' ;
+
+if_else : 'if' expr block ( 'else' ( if_else | block ) )? ;
+
+while_loop : 'while' expr block ;
 
 expr_stmt  : expr ';' ;
 expr       : logical ;
