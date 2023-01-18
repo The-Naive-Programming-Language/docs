@@ -11,12 +11,16 @@ stmt : ';'
      | block
      | if_else
      | while_loop
+     | return_stmt
      | expr_stmt
-     | 'print' '(' STRING ( ',' expr )* ')' ';'
-     | COMMENT ;
+     | COMMENT
+     ;
 
-decl_stmt : 'let' IDENT ( '=' init )? ';' ;
-init      : expr ;
+decl_stmt  : 'let' IDENT ( '=' init )? ';'
+           | 'fn' IDENT '(' ident_list? ')' block
+           ;
+init       : expr ;
+ident_list : IDENT ( ',' IDENT )* ;
 
 assign_stmt : IDENT '=' expr ';' ;
 
@@ -26,8 +30,15 @@ if_else : 'if' expr block ( 'else' ( if_else | block ) )? ;
 
 while_loop : 'while' expr block ;
 
+return_stmt : 'return' expr ;
+
 expr_stmt  : expr ';' ;
-expr       : logical ;
+expr_list  : expr ( ',' expr )* ;
+expr       : lambda ;
+lambda     : 'fn' '(' ident_list ')' '->' expr
+           | 'fn' '(' ident_list ')' block
+           | logical
+           ;
 logical    : or_clause ;
 or_clause  : and_clause ( 'or' and_clause )* ;
 and_clause : relational ( 'and' relational )* ;
@@ -35,7 +46,10 @@ relational : term ( ('=='|'/='|'<'|'>'|'<='|'>=') term )* ;
 term       : factor ( ('+'|'-') factor )* ;
 factor     : unary ( ('*'|'/'|'%') unary )* ;
 unary      : ('not'|'-') unary
-           | primary ;
+           | call ;
+call       : IDENT '(' expr_list? ')'
+           | primary
+           ;
 primary    : INT | FLOAT | TRUE | FALSE | CHAR | STRING | IDENT | '(' expr ')' ;
 
 //
