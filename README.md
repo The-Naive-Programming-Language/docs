@@ -9,6 +9,7 @@ For more information, see the [Homepage](naive-lang.github.io).
 ## Language Features
 
 - [ ] Array
+- [ ] For-each (iterator protocol)
 - [ ] Hash
 - [ ] Module
 - [ ] Concurrency (coroutines? traditional threads?)
